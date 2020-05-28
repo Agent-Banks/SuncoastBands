@@ -9,8 +9,8 @@ CREATE TABLE "BANDS"
   "Website" TEXT,
   "Style" TEXT,
   "IsSigned" BOOLEAN,
-  "ContractName" TEXT,
-  "ContractPhoneNumber" TEXT
+  "ContactName" TEXT,
+  "ContactPhoneNumber" TEXT
 )
 
 CREATE TABLE "Albums"
@@ -25,6 +25,29 @@ CREATE TABLE "Albums"
 --2. 
 
 INSERT INTO "BANDS"
-  ( "Name", "CountryOfOrign", "NumberOfMemebers", "Website", "Style", "IsSigned", "ContractName", "ContractPhoneNumber")
+  ( "Name", "CountryOfOrign", "NumberOfMemebers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
 VALUES
-  ()
+  ('Led Zeppelin', 'United Kingdom', "4", 'ledzeppelin.com', 'Rock', 'True', 'Bill', '727-765-0978');
+
+--3. 
+
+SELECT *
+FROM "BANDS";
+
+--4.
+
+INSERT INTO "Albums"
+  ("BandId", "Title", "IsExplicit", "ReleaseDate")
+VALUES
+  ('1', 'Houses of The Holy', 'False', '1973-03-28 12:00:00');
+
+
+--5. 
+
+UPDATE "Bands" SET "IsSigned" = 'False' WHERE "Name" = 'Led Zeppelin';
+
+--6.
+
+UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Led Zeppelin';
+
+--7. 
