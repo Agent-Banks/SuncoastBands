@@ -19,7 +19,7 @@ CREATE TABLE "Albums"
   "BandId" INTEGER REFERENCES "BANDS" ("Id"),
   "Title" TEXT NOT NULL,
   "IsExplicit" BOOLEAN,
-  "ReleaseDate" TIMESTAMP,
+  "ReleaseDate" DATE,
 )
 
 --2. 
@@ -39,7 +39,7 @@ FROM "BANDS";
 INSERT INTO "Albums"
   ("BandId", "Title", "IsExplicit", "ReleaseDate")
 VALUES
-  ('1', 'Houses of The Holy', 'False', '1973-03-28 12:00:00');
+  ('1', 'Houses of The Holy', 'False', '1973-03-28');
 
 
 --5. 
@@ -51,3 +51,10 @@ UPDATE "Bands" SET "IsSigned" = 'False' WHERE "Name" = 'Led Zeppelin';
 UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Led Zeppelin';
 
 --7. 
+--Select "Employees"."FullName", "Departments"."Id"
+--From "Employees"
+--Join "Departments" ON "Employees"."DepartmentId" = "Departments"."Id";
+
+SELECT "Albums"."Title", "Bands"."Name"
+FROM "Albums"
+  JOIN "BANDS" ON "Albums"."BandId" = "Bands"."Id";
