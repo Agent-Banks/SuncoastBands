@@ -30,6 +30,22 @@ namespace SuncoastBands
             }
 
         }
+        static bool PromptForBool(string prompt)
+        {
+            Console.Write(prompt);
+            bool inputFromUser;
+            var isThisGoodInput = bool.TryParse(Console.ReadLine(), out inputFromUser);
+
+            if (inputFromUser == true || inputFromUser == false)
+            {
+                return inputFromUser;
+            }
+            else
+            {
+                Console.WriteLine("Sorry that is an invalid input. I am using false as your answer");
+                return false;
+            }
+        }
         static void Main(string[] args)
         {
             // Get a new context that will connect to the database
@@ -69,10 +85,37 @@ namespace SuncoastBands
 
                 if (option == 1)
                 {
+                    Console.WriteLine("Here are all the Bands in Suncoast Bands");
                     foreach (var band in bands)
                     {
-                        //Console.WriteLine(band.Name);
+                        Console.WriteLine(band.Name);
                     }
+                }
+
+                if (option == 2)
+                {
+                    var newName = PromptForString("What is the name of the band?");
+                    var newCountryOfOrigin = PromptForString("What is the country of origin for this band?");
+                    var newNumberOfMembers = PromptForInteger("How many members are in this band?");
+                    var newWebsite = PromptForString("What is the bands website?");
+                    var newStyle = PromptForString("What style of music does this band play?");
+                    var newIsSigned = PromptForBool("Has this band signed with our record label? 'True or False'");
+                    var newContactName = PromptForString("What is the primary contact name for this band?");
+                    var newContactPhoneNumber = PromptForString("What is the primary phone number for this contact?");
+                    var newBand = new Band
+                    {
+                        Name = newName,
+                        CountryOfOrigin = newCountryOfOrigin,
+                        NumberOfMembers = newNumberOfMembers,
+                        Website = newWebsite,
+                        Style = newStyle,
+                        IsSigned = newIsSigned,
+                        ContactName = newContactName,
+                        ContactPhoneNumber = newContactPhoneNumber
+                    };
+
+                    context.Bands.Add(newBand);
+                    context.SaveChanges();
                 }
             }
         }
