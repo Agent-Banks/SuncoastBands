@@ -1,6 +1,6 @@
 --1.
 
-CREATE TABLE "BANDS"
+CREATE TABLE "Bands"
 (
   "Id" SERIAL PRIMARY KEY,
   "Name" TEXT NOT NULL,
@@ -11,28 +11,28 @@ CREATE TABLE "BANDS"
   "IsSigned" BOOLEAN,
   "ContactName" TEXT,
   "ContactPhoneNumber" TEXT
-)
+);
 
 CREATE TABLE "Albums"
 (
   "Id" SERIAL PRIMARY KEY,
-  "BandId" INTEGER REFERENCES "BANDS" ("Id"),
+  "BandId" INTEGER REFERENCES "Bands" ("Id"),
   "Title" TEXT NOT NULL,
   "IsExplicit" BOOLEAN,
-  "ReleaseDate" DATE,
-)
+  "ReleaseDate" DATE
+);
 
 --2. 
 
-INSERT INTO "BANDS"
+INSERT INTO "Bands"
   ( "Name", "CountryOfOrign", "NumberOfMemebers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
 VALUES
-  ('Led Zeppelin', 'United Kingdom', "4", 'ledzeppelin.com', 'Rock', 'True', 'Bill', '727-765-0978');
+  ('Led Zeppelin', 'United Kingdom', '4', 'ledzeppelin.com', 'Rock', 'True', 'Bill', '727-765-0978');
 
 --3. 
 
 SELECT *
-FROM "BANDS";
+FROM "Bands";
 
 --4.
 
@@ -57,4 +57,22 @@ UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Led Zeppelin';
 
 SELECT "Albums"."Title", "Bands"."Name"
 FROM "Albums"
-  JOIN "BANDS" ON "Albums"."BandId" = "Bands"."Id";
+  JOIN "Bands" ON "Albums"."BandId" = "Bands"."Id";
+
+--8.
+
+Select *
+FROM "Albums"
+ORDER BY "Albums"."ReleaseDate";
+
+--9.
+
+SELECT *
+FROM "Bands"
+WHERE  "IsSigned" = 'True';
+
+--10.
+
+SELECT *
+FROM "Bands"
+WHERE  "IsSigned" = 'False';
