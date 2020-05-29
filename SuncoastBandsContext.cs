@@ -10,7 +10,7 @@ namespace SuncoastBands
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("server=localhost;database=SuncoastMovies");
+            optionsBuilder.UseNpgsql("server=localhost;database=SuncoastBands");
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
             optionsBuilder.UseLoggerFactory(loggerFactory);
         }
