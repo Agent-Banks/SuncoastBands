@@ -15,4 +15,6 @@ namespace SuncoastBands
         public string ContactName { get; set; }
         public string ContactPhoneNumber { get; set; }
     }
+
+
 }

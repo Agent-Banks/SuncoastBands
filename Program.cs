@@ -253,6 +253,62 @@ namespace SuncoastBands
                         }
                     }
                 }
+
+                if (option == 4)
+                {
+                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    foreach (var band in bands)
+                    {
+                        Console.WriteLine($"({band.Id}), {band.Name} ");
+                    }
+
+                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+
+                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+                    if (selectedBand == null)
+                    {
+                        Console.WriteLine("You entered a band that doesn't exist.");
+
+
+                    }
+                    else
+                    {
+                        bool newBandIsSigned = false;
+                        selectedBand.IsSigned = newBandIsSigned;
+                        Console.WriteLine($"This band is now let go");
+                    }
+                    context.SaveChanges();
+                }
+
+                if (option == 5)
+                {
+                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    foreach (var band in bands)
+                    {
+                        Console.WriteLine($"({band.Id}), {band.Name} ");
+                    }
+
+                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+
+                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+                    if (selectedBand == null)
+                    {
+                        Console.WriteLine("You entered a band that doesn't exist.");
+
+
+                    }
+                    else
+                    {
+                        bool newBandIsSigned = true;
+                        selectedBand.IsSigned = newBandIsSigned;
+                        Console.WriteLine($"This band is now resigned");
+                    }
+                    context.SaveChanges();
+                }
             }
         }
     }
