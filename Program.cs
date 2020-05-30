@@ -223,6 +223,36 @@ namespace SuncoastBands
                         context.SaveChanges();
                     }
                 }
+
+                if (option == 6)
+                {
+                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    foreach (var band in bands)
+                    {
+                        Console.WriteLine($"({band.Id}), {band.Name} ");
+                    }
+
+                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+
+                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+                    if (selectedBand == null)
+                    {
+                        Console.WriteLine("You entered a band that doesn't exist.");
+
+
+                    }
+                    else
+                    {
+                        foreach (var album in albums)
+                        {
+                            var specificAlbums = albums.Select(band => band.Id == selectedBandId);
+
+                            Console.WriteLine($"This band made the album {album.Title}");
+                        }
+                    }
+                }
             }
         }
     }
