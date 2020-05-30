@@ -94,14 +94,14 @@ namespace SuncoastBands
 
                 if (option == 2)
                 {
-                    var newName = PromptForString("What is the name of the band?");
-                    var newCountryOfOrigin = PromptForString("What is the country of origin for this band?");
-                    var newNumberOfMembers = PromptForInteger("How many members are in this band?");
-                    var newWebsite = PromptForString("What is the bands website?");
-                    var newStyle = PromptForString("What style of music does this band play?");
-                    var newIsSigned = PromptForBool("Has this band signed with our record label? 'True or False'");
-                    var newContactName = PromptForString("What is the primary contact name for this band?");
-                    var newContactPhoneNumber = PromptForString("What is the primary phone number for this contact?");
+                    var newName = PromptForString("What is the name of the band? ");
+                    var newCountryOfOrigin = PromptForString("What is the country of origin for this band? ");
+                    var newNumberOfMembers = PromptForInteger("How many members are in this band? ");
+                    var newWebsite = PromptForString("What is the bands website? ");
+                    var newStyle = PromptForString("What style of music does this band play? ");
+                    var newIsSigned = PromptForBool("Has this band signed with our record label? 'True or False' ");
+                    var newContactName = PromptForString("What is the primary contact name for this band? ");
+                    var newContactPhoneNumber = PromptForString("What is the primary phone number for this contact? ");
                     var newBand = new Band
                     {
                         Name = newName,
@@ -116,6 +116,38 @@ namespace SuncoastBands
 
                     context.Bands.Add(newBand);
                     context.SaveChanges();
+                }
+
+                if (option == 8)
+                {
+                    Console.WriteLine("Here are all the bands that are signed");
+
+                    foreach (var band in bands)
+                    {
+
+                        if (band.IsSigned == true)
+                        {
+                            Console.WriteLine(band.Name);
+                        }
+                    }
+                }
+
+                if (option == 9)
+                {
+                    Console.WriteLine("Here are all the bands that are not signed");
+
+                    foreach (var band in bands)
+                    {
+                        if (band.IsSigned == false)
+                        {
+                            Console.WriteLine(band.Name);
+                        }
+                    }
+                }
+
+                if (option == 7)
+                {
+                    Console
                 }
             }
         }
