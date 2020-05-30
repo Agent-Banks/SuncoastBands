@@ -18,5 +18,11 @@ namespace SuncoastBands
         //      |     |
         public Band Band { get; set; }
 
+        public string AlbumDescription()
+        {
+            var albumDescription = $"{Band.Name} released {Title} on {ReleaseDate}";
+            return albumDescription;
+        }
+
     }
 }
