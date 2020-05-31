@@ -20,7 +20,7 @@ namespace SuncoastBands
 
         public string AlbumDescription()
         {
-            var albumDescription = $"{Band.Name} released {Title} on {ReleaseDate}";
+            var albumDescription = $"{Title} was released on {ReleaseDate}";
             return albumDescription;
         }
 

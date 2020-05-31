@@ -172,13 +172,13 @@ namespace SuncoastBands
 
                 if (option == 7)
                 {
-                    Console.WriteLine("Here are all the albums ordered by release date:");
-                    foreach (var album in albums)
-                    {
-                        var orderAlbumByReleaseDate = context.Albums.OrderBy(album => album.ReleaseDate);
-                        var description = album.AlbumDescription();
 
-                        Console.WriteLine(description);
+                    Console.WriteLine("Here are all the albums ordered by release date:");
+                    var orderAlbumByReleaseDate = context.Albums.OrderBy(album => album.ReleaseDate);
+                    foreach (var album in orderAlbumByReleaseDate)
+                    {
+                        var albumDescription = album.AlbumDescription();
+                        Console.WriteLine(albumDescription);
                     }
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
@@ -247,9 +247,12 @@ namespace SuncoastBands
                     {
                         foreach (var album in albums)
                         {
-                            var specificAlbums = albums.Select(band => band.Id == selectedBandId);
-
-                            Console.WriteLine($"This band made the album {album.Title}");
+                            //var specificAlbums = albums.Select(album => album.BandId == selectedBandId);
+                            //Console.WriteLine($"This band made the album {}");
+                            if (album.BandId == selectedBandId)
+                            {
+                                Console.WriteLine($"{album.Title}");
+                            }
                         }
                     }
                 }
