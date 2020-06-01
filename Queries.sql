@@ -5,7 +5,7 @@ CREATE TABLE "Bands"
   "Id" SERIAL PRIMARY KEY,
   "Name" TEXT NOT NULL,
   "CountryOfOrign" TEXT,
-  "NumberOfMemebers" INT,
+  "NumberOfMembers" INT,
   "Website" TEXT,
   "Style" TEXT,
   "IsSigned" BOOLEAN,
@@ -25,7 +25,7 @@ CREATE TABLE "Albums"
 --2. 
 
 INSERT INTO "Bands"
-  ( "Name", "CountryOfOrign", "NumberOfMemebers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
+  ( "Name", "CountryOfOrign", "NumberOfMembers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
 VALUES
   ('Led Zeppelin', 'United Kingdom', '4', 'ledzeppelin.com', 'Rock', 'True', 'Bill', '727-765-0978');
 
