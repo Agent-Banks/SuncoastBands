@@ -93,14 +93,17 @@ namespace SuncoastBands
 
                 if (option == 10)
                 {
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Thank you for using Suncoast Bands Record Label Database!");
                     Console.WriteLine("We hope to see you again!");
+                    Console.WriteLine("--------------------------");
                     userHasQuitApp = true;
                 }
 
                 if (option == 1)
                 {
                     Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    Console.WriteLine("--------------------------");
                     foreach (var band in bands)
                     {
                         Console.WriteLine(band.Name);
@@ -146,6 +149,7 @@ namespace SuncoastBands
                 if (option == 8)
                 {
                     Console.WriteLine("Here are all the bands that are signed:");
+                    Console.WriteLine("--------------------------");
 
                     foreach (var band in bands)
                     {
@@ -164,6 +168,7 @@ namespace SuncoastBands
                 if (option == 9)
                 {
                     Console.WriteLine("Here are all the bands that are not signed:");
+                    Console.WriteLine("--------------------------");
 
                     foreach (var band in bands)
                     {
@@ -183,8 +188,11 @@ namespace SuncoastBands
                 if (option == 7)
                 {
 
-                    Console.WriteLine("Here are all the albums ordered by release date:");
+                    Console.WriteLine("Here are all the albums in our record label ordered by release date:");
+                    Console.WriteLine("--------------------------");
+
                     var orderAlbumByReleaseDate = context.Albums.OrderBy(album => album.ReleaseDate);
+
                     foreach (var album in orderAlbumByReleaseDate)
                     {
                         var albumDescription = album.AlbumDescription();
@@ -200,11 +208,12 @@ namespace SuncoastBands
                 {
 
                     Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    Console.WriteLine("--------------------------");
                     foreach (var band in bands)
                     {
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
-
+                    Console.WriteLine("--------------------------");
                     var selectedBandId = PromptForInteger("Which band would you like to chose?");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
@@ -244,12 +253,15 @@ namespace SuncoastBands
                 if (option == 6)
                 {
                     Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    Console.WriteLine("--------------------------");
                     foreach (var band in bands)
                     {
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
 
+                    Console.WriteLine("--------------------------");
                     var selectedBandId = PromptForInteger("Which band would you like to chose? ");
+                    Console.WriteLine("--------------------------");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
 
@@ -262,6 +274,9 @@ namespace SuncoastBands
                     }
                     else
                     {
+                        Console.WriteLine("This band has made the following albums:");
+                        Console.WriteLine("--------------------------");
+
                         foreach (var album in albums)
                         {
                             if (album.BandId == selectedBandId)
@@ -279,10 +294,14 @@ namespace SuncoastBands
                 if (option == 4)
                 {
                     Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+                    Console.WriteLine("--------------------------");
                     foreach (var band in bands)
                     {
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
+
+                    Console.WriteLine("--------------------------");
+                    Console.WriteLine();
 
                     var selectedBandId = PromptForInteger("Which band would you like to let go? ");
 
@@ -299,6 +318,7 @@ namespace SuncoastBands
                     {
                         bool newBandIsSigned = false;
                         selectedBand.IsSigned = newBandIsSigned;
+                        Console.WriteLine("--------------------------");
                         Console.WriteLine($"This band is now let go");
                     }
                     context.SaveChanges();
@@ -310,12 +330,13 @@ namespace SuncoastBands
 
                 if (option == 5)
                 {
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Here are all the Bands in Suncoast Bands:");
                     foreach (var band in bands)
                     {
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
-
+                    Console.WriteLine("--------------------------");
                     var selectedBandId = PromptForInteger("Which band would you like to resign? ");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
@@ -331,6 +352,7 @@ namespace SuncoastBands
                     {
                         bool newBandIsSigned = true;
                         selectedBand.IsSigned = newBandIsSigned;
+                        Console.WriteLine("--------------------------");
                         Console.WriteLine($"This band is now resigned");
                     }
                     context.SaveChanges();
