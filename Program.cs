@@ -71,16 +71,12 @@ namespace SuncoastBands
             var bands = context.Bands;
             var albums = context.Albums.Include(album => album.Band);
 
-            //var bandCount = bands.Count();
-
-            //Console.WriteLine($"There are {bandCount} bands!");
-
             var userHasQuitApp = false;
 
             while (userHasQuitApp == false)
             {
                 Console.WriteLine("------------------------------------------------------------");
-                Console.WriteLine("Welcome to Suncoast Bands Record Label. Please choose an option.");
+                Console.WriteLine("Welcome to Suncoast Bands Record Label. Please choose an option:");
                 Console.WriteLine("(1) - View all the bands");
                 Console.WriteLine("(2) - Add a new band");
                 Console.WriteLine("(3) - Add an album for a band");
@@ -97,6 +93,8 @@ namespace SuncoastBands
 
                 if (option == 10)
                 {
+                    Console.WriteLine("Thank you for using Suncoast Bands Record Label Database!");
+                    Console.WriteLine("We hope to see you again!");
                     userHasQuitApp = true;
                 }
 
@@ -107,6 +105,9 @@ namespace SuncoastBands
                     {
                         Console.WriteLine(band.Name);
                     }
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.WriteLine();
                 }
 
                 if (option == 2)
@@ -133,6 +134,11 @@ namespace SuncoastBands
 
                     context.Bands.Add(newBand);
                     context.SaveChanges();
+                    Console.WriteLine("This band has been added to the record label.");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.WriteLine();
                 }
 
                 if (option == 8)
@@ -207,9 +213,9 @@ namespace SuncoastBands
                     }
                     else
                     {
-                        var newTitle = PromptForString("What is the title of the album?");
-                        var newIsExplicit = PromptForBool("Is this album explicit? (True/False)");
-                        var newReleasedate = PromptForDateTime("What is the release date? (MM/dd/yyyy h:mm tt)");
+                        var newTitle = PromptForString("What is the title of the album? ");
+                        var newIsExplicit = PromptForBool("Is this album explicit? (True/False) ");
+                        var newReleasedate = PromptForDateTime("What is the release date? (MM/dd/yyyy h:mm tt) ");
 
                         var newAlbum = new Album()
                         {
@@ -221,6 +227,12 @@ namespace SuncoastBands
 
                         context.Albums.Add(newAlbum);
                         context.SaveChanges();
+                        Console.WriteLine("A new album has been added for this band.");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        Console.WriteLine();
+
                     }
                 }
 
@@ -232,7 +244,7 @@ namespace SuncoastBands
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
 
-                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+                    var selectedBandId = PromptForInteger("Which band would you like to chose? ");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
 
@@ -247,14 +259,15 @@ namespace SuncoastBands
                     {
                         foreach (var album in albums)
                         {
-                            //var specificAlbums = albums.Select(album => album.BandId == selectedBandId);
-                            //Console.WriteLine($"This band made the album {}");
                             if (album.BandId == selectedBandId)
                             {
                                 Console.WriteLine($"{album.Title}");
                             }
                         }
                     }
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.WriteLine();
                 }
 
                 if (option == 4)
@@ -265,7 +278,7 @@ namespace SuncoastBands
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
 
-                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+                    var selectedBandId = PromptForInteger("Which band would you like to let go? ");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
 
@@ -283,6 +296,9 @@ namespace SuncoastBands
                         Console.WriteLine($"This band is now let go");
                     }
                     context.SaveChanges();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.WriteLine();
                 }
 
                 if (option == 5)
@@ -293,7 +309,7 @@ namespace SuncoastBands
                         Console.WriteLine($"({band.Id}), {band.Name} ");
                     }
 
-                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
+                    var selectedBandId = PromptForInteger("Which band would you like to resign? ");
 
                     var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
 
@@ -311,6 +327,9 @@ namespace SuncoastBands
                         Console.WriteLine($"This band is now resigned");
                     }
                     context.SaveChanges();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    Console.WriteLine();
                 }
             }
         }
