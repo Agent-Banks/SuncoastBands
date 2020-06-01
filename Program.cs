@@ -68,13 +68,16 @@ namespace SuncoastBands
             // Get a new context that will connect to the database
             var context = new SuncoastBandsContext();
 
-            var bands = context.Bands;
-            var albums = context.Albums.Include(album => album.Band);
+            //var bands = context.Bands;
+            //var albums = context.Albums.Include(album => album.Band);
 
             var userHasQuitApp = false;
 
             while (userHasQuitApp == false)
             {
+                var bands = context.Bands;
+                var albums = context.Albums.Include(album => album.Band);
+
                 Console.WriteLine("------------------------------------------------------------");
                 Console.WriteLine("Welcome to Suncoast Bands Record Label. Please choose an option:");
                 Console.WriteLine("(1) - View all the bands");
