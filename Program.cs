@@ -105,6 +105,7 @@ namespace SuncoastBands
                     {
                         Console.WriteLine(band.Name);
                     }
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -134,8 +135,9 @@ namespace SuncoastBands
 
                     context.Bands.Add(newBand);
                     context.SaveChanges();
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("This band has been added to the record label.");
-                    Console.WriteLine();
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -153,6 +155,7 @@ namespace SuncoastBands
                             Console.WriteLine(band.Name);
                         }
                     }
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -170,6 +173,7 @@ namespace SuncoastBands
 
                         }
                     }
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -186,6 +190,7 @@ namespace SuncoastBands
                         var albumDescription = album.AlbumDescription();
                         Console.WriteLine(albumDescription);
                     }
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -265,6 +270,7 @@ namespace SuncoastBands
                             }
                         }
                     }
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -296,6 +302,7 @@ namespace SuncoastBands
                         Console.WriteLine($"This band is now let go");
                     }
                     context.SaveChanges();
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
@@ -327,6 +334,7 @@ namespace SuncoastBands
                         Console.WriteLine($"This band is now resigned");
                     }
                     context.SaveChanges();
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     Console.WriteLine();
