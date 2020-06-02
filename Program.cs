@@ -61,7 +61,56 @@ namespace SuncoastBands
                 Console.WriteLine("Sorry, that isn't a valid input, I'm putting todays date.");
                 return DateTime.Now;
             }
+        }
+        static void AddNewBand()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var newName = PromptForString("What is the name of the band? ");
+            var newCountryOfOrigin = PromptForString("What is the country of origin for this band? ");
+            var newNumberOfMembers = PromptForInteger("How many members are in this band? ");
+            var newWebsite = PromptForString("What is the bands website? ");
+            var newStyle = PromptForString("What style of music does this band play? ");
+            var newIsSigned = PromptForBool("Has this band signed with our record label? 'True or False' ");
+            var newContactName = PromptForString("What is the primary contact name for this band? ");
+            var newContactPhoneNumber = PromptForString("What is the primary phone number for this contact? ");
 
+            var newBand = new Band
+            {
+                Name = newName,
+                CountryOfOrigin = newCountryOfOrigin,
+                NumberOfMembers = newNumberOfMembers,
+                Website = newWebsite,
+                Style = newStyle,
+                IsSigned = newIsSigned,
+                ContactName = newContactName,
+                ContactPhoneNumber = newContactPhoneNumber
+            };
+
+            context.Bands.Add(newBand);
+            context.SaveChanges();
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("This band has been added to the record label.");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        static void ViewAllBands()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+            Console.WriteLine("--------------------------");
+            foreach (var band in bands)
+            {
+                Console.WriteLine(band.Name);
+            }
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
         }
         static void Main(string[] args)
         {
@@ -105,48 +154,12 @@ namespace SuncoastBands
 
                 if (option == 1)
                 {
-                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
-                    Console.WriteLine("--------------------------");
-                    foreach (var band in bands)
-                    {
-                        Console.WriteLine(band.Name);
-                    }
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    ViewAllBands();
                 }
 
                 if (option == 2)
                 {
-                    var newName = PromptForString("What is the name of the band? ");
-                    var newCountryOfOrigin = PromptForString("What is the country of origin for this band? ");
-                    var newNumberOfMembers = PromptForInteger("How many members are in this band? ");
-                    var newWebsite = PromptForString("What is the bands website? ");
-                    var newStyle = PromptForString("What style of music does this band play? ");
-                    var newIsSigned = PromptForBool("Has this band signed with our record label? 'True or False' ");
-                    var newContactName = PromptForString("What is the primary contact name for this band? ");
-                    var newContactPhoneNumber = PromptForString("What is the primary phone number for this contact? ");
-                    var newBand = new Band
-                    {
-                        Name = newName,
-                        CountryOfOrigin = newCountryOfOrigin,
-                        NumberOfMembers = newNumberOfMembers,
-                        Website = newWebsite,
-                        Style = newStyle,
-                        IsSigned = newIsSigned,
-                        ContactName = newContactName,
-                        ContactPhoneNumber = newContactPhoneNumber
-                    };
-
-                    context.Bands.Add(newBand);
-                    context.SaveChanges();
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("This band has been added to the record label.");
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    AddNewBand();
                 }
 
                 if (option == 8)
