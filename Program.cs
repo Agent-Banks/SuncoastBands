@@ -101,24 +101,190 @@ namespace SuncoastBands
         {
             var context = new SuncoastBandsContext();
             var bands = context.Bands;
+
             Console.WriteLine("Here are all the Bands in Suncoast Bands:");
             Console.WriteLine("--------------------------");
+
             foreach (var band in bands)
             {
                 Console.WriteLine(band.Name);
             }
+
             Console.WriteLine("--------------------------");
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
             Console.WriteLine();
         }
+        
+        static void ViewAllAlbumsOrderedByRelease()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var albums = context.Albums.Include(album => album.Band);
+
+            Console.WriteLine("Here are all the albums in our record label ordered by release date:");
+            Console.WriteLine("--------------------------");
+
+            var orderAlbumByReleaseDate = context.Albums.OrderBy(album => album.ReleaseDate);
+
+            foreach (var album in orderAlbumByReleaseDate)
+            {
+                var albumDescription = album.AlbumDescription();
+                Console.WriteLine(albumDescription);
+            }
+                
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        static void AddAlbumForBand()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var albums = context.Albums.Include(album => album.Band);
+
+            Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+            Console.WriteLine("--------------------------");
+
+            foreach (var band in bands)
+            {
+                Console.WriteLine($"({band.Id}), {band.Name} ");
+            }
+
+            Console.WriteLine("--------------------------");
+            var selectedBandId = PromptForInteger("Which band would you like to chose?");
+
+            var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+            if (selectedBand == null)
+            {
+                Console.WriteLine("You entered a band that doesn't exist.");
+            }
+            else
+            {
+                var newTitle = PromptForString("What is the title of the album? ");
+                var newIsExplicit = PromptForBool("Is this album explicit? (True/False) ");
+                var newReleasedate = PromptForDateTime("What is the release date? (MM/dd/yyyy h:mm tt) ");
+
+                    var newAlbum = new Album()
+                    {
+                        Title = newTitle,
+                        IsExplicit = newIsExplicit,
+                        ReleaseDate = newReleasedate,
+                        BandId = selectedBand.Id
+                    };
+
+                context.Albums.Add(newAlbum);
+                context.SaveChanges();
+                Console.WriteLine("A new album has been added for this band.");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+                Console.WriteLine();
+            }
+        }
+
+        static void ViewAlbumsByBandName()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var albums = context.Albums.Include(album => album.Band);
+
+            Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+            Console.WriteLine("--------------------------");
+            
+            foreach (var band in bands)
+            {
+                Console.WriteLine($"({band.Id}), {band.Name} ");
+            }
+
+            Console.WriteLine("--------------------------");
+            var selectedBandId = PromptForInteger("Which band would you like to chose? ");
+            Console.WriteLine("--------------------------");
+
+            var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+            if (selectedBand == null)
+            {
+                Console.WriteLine("You entered a band that doesn't exist.");
+            }
+            else
+            {
+                Console.WriteLine("This band has made the following albums:");
+                Console.WriteLine("--------------------------");
+
+                foreach (var album in albums)
+                {
+                    if (album.BandId == selectedBandId)
+                    {
+                        Console.WriteLine($"{album.Title}");
+                    }
+                }
+            }
+                Console.WriteLine("--------------------------");
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+                Console.WriteLine();
+        }
+
+        static void ViewAllBandsThatAreSigned()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var albums = context.Albums.Include(album => album.Band);
+
+            Console.WriteLine("Here are all the bands that are signed:");
+            Console.WriteLine("--------------------------");
+
+            foreach (var band in bands)
+            {
+                if (band.IsSigned == true)
+                {
+                    Console.WriteLine(band.Name);
+                }
+            }
+
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        static void DropABand()
+        {
+            
+        }
+
+        static void ViewAllBandsThatAreNotSigned()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+            var albums = context.Albums.Include(album => album.Band);
+
+            Console.WriteLine("Here are all the bands that are not signed:");
+            Console.WriteLine("--------------------------");
+
+            foreach (var band in bands)
+            {
+                if (band.IsSigned == false)
+                {
+                     Console.WriteLine(band.Name);
+                }
+            }
+
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
         static void Main(string[] args)
         {
             // Get a new context that will connect to the database
             var context = new SuncoastBandsContext();
-
-            //var bands = context.Bands;
-            //var albums = context.Albums.Include(album => album.Band);
 
             var userHasQuitApp = false;
 
@@ -164,147 +330,27 @@ namespace SuncoastBands
 
                 if (option == 8)
                 {
-                    Console.WriteLine("Here are all the bands that are signed:");
-                    Console.WriteLine("--------------------------");
-
-                    foreach (var band in bands)
-                    {
-
-                        if (band.IsSigned == true)
-                        {
-                            Console.WriteLine(band.Name);
-                        }
-                    }
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    ViewAllBandsThatAreSigned();
                 }
 
                 if (option == 9)
                 {
-                    Console.WriteLine("Here are all the bands that are not signed:");
-                    Console.WriteLine("--------------------------");
-
-                    foreach (var band in bands)
-                    {
-                        if (band.IsSigned == false)
-                        {
-                            Console.WriteLine(band.Name);
-
-                        }
-                    }
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
-
+                    ViewAllBandsThatAreNotSigned();
                 }
 
                 if (option == 7)
                 {
-
-                    Console.WriteLine("Here are all the albums in our record label ordered by release date:");
-                    Console.WriteLine("--------------------------");
-
-                    var orderAlbumByReleaseDate = context.Albums.OrderBy(album => album.ReleaseDate);
-
-                    foreach (var album in orderAlbumByReleaseDate)
-                    {
-                        var albumDescription = album.AlbumDescription();
-                        Console.WriteLine(albumDescription);
-                    }
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    ViewAllAlbumsOrderedByRelease();
                 }
 
                 if (option == 3)
                 {
-
-                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
-                    Console.WriteLine("--------------------------");
-                    foreach (var band in bands)
-                    {
-                        Console.WriteLine($"({band.Id}), {band.Name} ");
-                    }
-                    Console.WriteLine("--------------------------");
-                    var selectedBandId = PromptForInteger("Which band would you like to chose?");
-
-                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
-
-
-                    if (selectedBand == null)
-                    {
-                        Console.WriteLine("You entered a band that doesn't exist.");
-
-
-                    }
-                    else
-                    {
-                        var newTitle = PromptForString("What is the title of the album? ");
-                        var newIsExplicit = PromptForBool("Is this album explicit? (True/False) ");
-                        var newReleasedate = PromptForDateTime("What is the release date? (MM/dd/yyyy h:mm tt) ");
-
-                        var newAlbum = new Album()
-                        {
-                            Title = newTitle,
-                            IsExplicit = newIsExplicit,
-                            ReleaseDate = newReleasedate,
-                            BandId = selectedBand.Id
-                        };
-
-                        context.Albums.Add(newAlbum);
-                        context.SaveChanges();
-                        Console.WriteLine("A new album has been added for this band.");
-                        Console.WriteLine();
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadKey();
-                        Console.WriteLine();
-
-                    }
+                    AddAlbumForBand();
                 }
 
                 if (option == 6)
                 {
-                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
-                    Console.WriteLine("--------------------------");
-                    foreach (var band in bands)
-                    {
-                        Console.WriteLine($"({band.Id}), {band.Name} ");
-                    }
-
-                    Console.WriteLine("--------------------------");
-                    var selectedBandId = PromptForInteger("Which band would you like to chose? ");
-                    Console.WriteLine("--------------------------");
-
-                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
-
-
-                    if (selectedBand == null)
-                    {
-                        Console.WriteLine("You entered a band that doesn't exist.");
-
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("This band has made the following albums:");
-                        Console.WriteLine("--------------------------");
-
-                        foreach (var album in albums)
-                        {
-                            if (album.BandId == selectedBandId)
-                            {
-                                Console.WriteLine($"{album.Title}");
-                            }
-                        }
-                    }
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    ViewAlbumsByBandName();
                 }
 
                 if (option == 4)
