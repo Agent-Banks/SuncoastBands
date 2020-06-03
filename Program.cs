@@ -253,11 +253,6 @@ namespace SuncoastBands
             Console.WriteLine();
         }
 
-        static void DropABand()
-        {
-            
-        }
-
         static void ViewAllBandsThatAreNotSigned()
         {
             var context = new SuncoastBandsContext();
@@ -279,6 +274,85 @@ namespace SuncoastBands
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
             Console.WriteLine();
+        }
+
+        static void DropABand()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+
+            Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+            Console.WriteLine("--------------------------");
+
+            foreach (var band in bands)
+            {
+                Console.WriteLine($"({band.Id}), {band.Name} ");
+            }
+
+            Console.WriteLine("--------------------------");
+            Console.WriteLine();
+            
+            var selectedBandId = PromptForInteger("Which band would you like to let go? ");
+
+            var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+            if (selectedBand == null)
+            {
+                Console.WriteLine("You entered a band that doesn't exist.");
+            }
+            else
+            {
+                bool newBandIsSigned = false;
+                selectedBand.IsSigned = newBandIsSigned;
+                Console.WriteLine("--------------------------");
+                Console.WriteLine($"This band is now let go");
+            }
+
+            context.SaveChanges();
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        static void ReSignABand()
+        {
+            var context = new SuncoastBandsContext();
+            var bands = context.Bands;
+
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("Here are all the Bands in Suncoast Bands:");
+
+            foreach (var band in bands)
+            {
+                Console.WriteLine($"({band.Id}), {band.Name} ");
+            }
+                
+                Console.WriteLine("--------------------------");
+                 Console.WriteLine();
+                var selectedBandId = PromptForInteger("Which band would you like to resign? ");
+
+                var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
+
+
+                if (selectedBand == null)
+                {
+                    Console.WriteLine("You entered a band that doesn't exist.");
+                }
+                else
+                {
+                    bool newBandIsSigned = true;
+                    selectedBand.IsSigned = newBandIsSigned;
+                    Console.WriteLine("--------------------------");
+                    Console.WriteLine($"This band is now resigned");
+                }
+
+                context.SaveChanges();
+                Console.WriteLine("--------------------------");
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+                Console.WriteLine();
         }
 
         static void Main(string[] args)
@@ -355,73 +429,12 @@ namespace SuncoastBands
 
                 if (option == 4)
                 {
-                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
-                    Console.WriteLine("--------------------------");
-                    foreach (var band in bands)
-                    {
-                        Console.WriteLine($"({band.Id}), {band.Name} ");
-                    }
-
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine();
-
-                    var selectedBandId = PromptForInteger("Which band would you like to let go? ");
-
-                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
-
-
-                    if (selectedBand == null)
-                    {
-                        Console.WriteLine("You entered a band that doesn't exist.");
-
-
-                    }
-                    else
-                    {
-                        bool newBandIsSigned = false;
-                        selectedBand.IsSigned = newBandIsSigned;
-                        Console.WriteLine("--------------------------");
-                        Console.WriteLine($"This band is now let go");
-                    }
-                    context.SaveChanges();
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    DropABand();
                 }
 
                 if (option == 5)
                 {
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Here are all the Bands in Suncoast Bands:");
-                    foreach (var band in bands)
-                    {
-                        Console.WriteLine($"({band.Id}), {band.Name} ");
-                    }
-                    Console.WriteLine("--------------------------");
-                    var selectedBandId = PromptForInteger("Which band would you like to resign? ");
-
-                    var selectedBand = bands.FirstOrDefault(band => band.Id == selectedBandId);
-
-
-                    if (selectedBand == null)
-                    {
-                        Console.WriteLine("You entered a band that doesn't exist.");
-
-
-                    }
-                    else
-                    {
-                        bool newBandIsSigned = true;
-                        selectedBand.IsSigned = newBandIsSigned;
-                        Console.WriteLine("--------------------------");
-                        Console.WriteLine($"This band is now resigned");
-                    }
-                    context.SaveChanges();
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadKey();
-                    Console.WriteLine();
+                    ReSignABand();
                 }
             }
         }
